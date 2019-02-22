@@ -26,9 +26,9 @@ public enum IncomeType implements IncomeConstants {
         return value;
     }
 
-    public static IncomeType valueOf(int key) {
+    public static IncomeType valueOf(Integer key) {
         return Arrays.stream(values())
-                .filter(type -> type.key == key)
+                .filter(type -> type.key.equals(key))
                 .findAny()
                 .orElse(null);
     }

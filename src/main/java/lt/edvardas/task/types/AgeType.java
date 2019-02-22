@@ -26,9 +26,9 @@ public enum AgeType implements AgeConstants {
         return value;
     }
 
-    public static AgeType valueOf(int key) {
+    public static AgeType valueOf(Integer key) {
         return Arrays.stream(values())
-                .filter(type -> type.key == key)
+                .filter(type -> type.key.equals(key))
                 .findAny()
                 .orElse(null);
     }
