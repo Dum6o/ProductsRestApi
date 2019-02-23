@@ -3,12 +3,11 @@ package lt.edvardas.task.controllers;
 import lt.edvardas.task.model.requests.ProductsRequest;
 import lt.edvardas.task.model.responses.ProductsResponse;
 import lt.edvardas.task.tools.ProductsManager;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(maxAge = 600)
 @RestController
 public class ProductsController {
 
@@ -18,9 +17,10 @@ public class ProductsController {
     }
 
     @RequestMapping(path = "/products", produces = "application/json")
-    public ProductsResponse getRecommendedProducts(@RequestParam Integer ageId,
-                                                   @RequestParam(defaultValue = "false") Boolean isStudent,
-                                                   @RequestParam Integer incomeId) {
+    public @ResponseBody
+    ProductsResponse getRecommendedProducts(@RequestParam Integer ageId,
+                                            @RequestParam Boolean isStudent,
+                                            @RequestParam Integer incomeId) {
         ProductsResponse response = new ProductsResponse();
         List<String> list = new ProductsManager().getProductsSuggestions(new ProductsRequest(ageId, incomeId, isStudent));
         if (!list.isEmpty()) {
